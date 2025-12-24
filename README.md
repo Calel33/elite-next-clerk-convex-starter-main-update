@@ -1,13 +1,14 @@
 # Starter.diy - Elite Next.js SaaS Starter Kit
 
-A modern, production-ready SaaS starter template for building full-stack applications using Next.js 15, Convex, Clerk, and Clerk Billing. The easiest way to start accepting payments with beautiful UI and seamless integrations.
+A modern, production-ready SaaS starter template for building full-stack applications using Next.js 16, React 19, Convex, Clerk, and Clerk Billing. The easiest way to start accepting payments with beautiful UI and seamless integrations.
 
 [🌐 Live Demo](https://elite-next-clerk-convex-starter.vercel.app/) – Try the app in your browser!
 
 
 ## Features
 
-- 🚀 **Next.js 15 with App Router** - Latest React framework with server components
+- 🚀 **Next.js 16 with App Router** - Latest React framework with server components
+- ⚛️ **React 19** - Latest React with enhanced server components and actions
 - ⚡️ **Turbopack** - Ultra-fast development with hot module replacement
 - 🎨 **TailwindCSS v4** - Modern utility-first CSS with custom design system
 - 🔐 **Clerk Authentication** - Complete user management with social logins
@@ -27,7 +28,8 @@ A modern, production-ready SaaS starter template for building full-stack applica
 ## Tech Stack
 
 ### Frontend
-- **Next.js 15** - React framework with App Router
+- **Next.js 16** - React framework with App Router
+- **React 19** - Latest React with enhanced features
 - **TailwindCSS v4** - Utility-first CSS framework
 - **shadcn/ui** - Modern component library
 - **Radix UI** - Accessible component primitives
@@ -331,4 +333,4 @@ This project is licensed under the MIT License.
 
 **Stop rebuilding the same foundation over and over.** Starter.diy eliminates weeks of integration work by providing a complete, production-ready SaaS template with authentication, payments, and real-time data working seamlessly out of the box.
 
-Built with ❤️ using Next.js 15, Convex, Clerk, and modern web technologies.
+Built with ❤️ using Next.js 16, React 19, Convex, Clerk, and modern web technologies.
