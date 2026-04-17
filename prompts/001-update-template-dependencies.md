@@ -53,17 +53,19 @@ Your research must cover:
 5. **Node.js Compatibility**
    - Verify all packages work with Node.js 24.12.0
    - Check for any engine requirements that need updating
-</scope>
+     </scope>
 
 <research_process>
 Follow this systematic approach:
 
 **Phase 1: Current State Assessment**
+
 1. Read @package.json completely to understand all current dependencies
 2. Use the codebase-retrieval MCP tool to understand the project structure and identify all key code patterns being used
 3. Document the current tech stack baseline
 
 **Phase 2: Latest Versions Research**
+
 1. Research latest stable versions for each dependency using web search
 2. Pay special attention to:
    - Next.js 16 (current version, release notes, migration guide)
@@ -73,6 +75,7 @@ Follow this systematic approach:
 3. Create a dependency update matrix showing: package name, current version, latest version, update type (major/minor/patch)
 
 **Phase 3: Security Audit**
+
 1. Run: `npm audit --json` to get security vulnerability report
 2. Research any flagged vulnerabilities
 3. Check npm advisories for all current packages
@@ -80,6 +83,7 @@ Follow this systematic approach:
 
 **Phase 4: Breaking Changes Documentation**
 For each package with major version updates:
+
 1. Find official migration guides and changelogs
 2. Document breaking changes that affect this template
 3. Identify specific code locations that need updates
@@ -87,6 +91,7 @@ For each package with major version updates:
 
 **Phase 5: Code Pattern Analysis**
 Use codebase-retrieval to examine:
+
 1. App Router usage patterns in app/ directory
 2. Server Component and Client Component patterns
 3. Clerk authentication implementation
@@ -97,11 +102,12 @@ Compare against latest best practices and document modernization opportunities.
 
 **Phase 6: Migration Plan Creation**
 Synthesize all findings into actionable migration plan with:
+
 1. Updated package.json with all new versions
 2. Prioritized list of code changes needed
 3. Step-by-step migration instructions
 4. Testing strategy to verify nothing breaks
-</research_process>
+   </research_process>
 
 <deliverables>
 Create a comprehensive report saved to: `./research/template-update-plan.md`
@@ -109,42 +115,52 @@ Create a comprehensive report saved to: `./research/template-update-plan.md`
 The report must include:
 
 ## 1. Executive Summary
+
 - High-level overview of updates needed
 - Security status and critical issues
 - Estimated effort for full migration
 
 ## 2. Dependency Update Matrix
+
 Table format:
 | Package | Current | Latest | Type | Breaking Changes | Security Issues |
 |---------|---------|--------|------|------------------|-----------------|
 
 ## 3. Security Audit Results
+
 - Full vulnerability report
 - Severity levels (critical/high/medium/low)
 - Remediation steps for each issue
 - Packages that need immediate attention
 
 ## 4. Breaking Changes Detail
+
 For each major update:
+
 - What changed
 - Why it matters for this template
 - Specific files/patterns affected
 - Migration steps required
 
 ## 5. Code Pattern Updates
+
 - Current patterns vs. modern best practices
 - Specific code locations needing updates
 - Example before/after code snippets
 - Rationale for each modernization
 
 ## 6. Updated package.json
+
 Complete, ready-to-use package.json with:
+
 - All dependencies updated to latest stable
 - Security issues resolved
 - Peer dependency compatibility verified
 
 ## 7. Migration Checklist
+
 Step-by-step instructions:
+
 - [ ] Pre-migration steps (backups, branch creation)
 - [ ] Dependency updates in order
 - [ ] Code pattern migrations
@@ -152,6 +168,7 @@ Step-by-step instructions:
 - [ ] Verification steps
 
 ## 8. Risk Assessment
+
 - Potential issues during migration
 - Rollback strategy
 - Testing recommendations
@@ -164,7 +181,7 @@ Use these tools effectively:
 
 1. **Read tool**: Read @package.json and any configuration files
 2. **Codebase-retrieval MCP**: Understand code patterns and structure
-3. **Bash commands**: 
+3. **Bash commands**:
    - `npm audit --json` for security scan
    - `npm outdated --json` for version info (if helpful)
 4. **Web search**: Research latest versions, migration guides, security advisories
@@ -175,6 +192,7 @@ For maximum efficiency, invoke multiple tools in parallel when gathering indepen
 
 <evaluation_criteria>
 Your research is complete when:
+
 - ✅ All dependencies have been checked for updates
 - ✅ Security audit has been run and analyzed
 - ✅ All breaking changes have been documented with migration steps
@@ -182,7 +200,7 @@ Your research is complete when:
 - ✅ Updated package.json is ready to use
 - ✅ Migration checklist is clear and actionable
 - ✅ Report is comprehensive, well-organized, and production-ready
-</evaluation_criteria>
+  </evaluation_criteria>
 
 <verification>
 Before completing, verify:
@@ -195,6 +213,7 @@ Before completing, verify:
 </verification>
 
 <success_criteria>
+
 - Comprehensive audit of all 40+ dependencies in package.json
 - Security vulnerabilities identified and prioritized
 - Next.js 16 migration path clearly documented
@@ -203,4 +222,4 @@ Before completing, verify:
 - Ready-to-use updated package.json provided
 - Clear, actionable migration checklist created
 - Report is thorough enough to execute the full migration confidently
-</success_criteria>
+  </success_criteria>

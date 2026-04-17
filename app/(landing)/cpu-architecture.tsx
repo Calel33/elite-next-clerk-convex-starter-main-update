@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import React from "react";
+import { cn } from '@/lib/utils';
+import React from 'react';
 
 export interface CpuArchitectureSvgProps {
   className?: string;
@@ -15,9 +15,9 @@ export interface CpuArchitectureSvgProps {
 
 const CpuArchitecture = ({
   className,
-  width = "100%",
-  height = "100%",
-  text = "CPU",
+  width = '100%',
+  height = '100%',
+  text = 'CPU',
   showCpuConnections = true,
   animateText = true,
   lineMarkerSize = 18,
@@ -26,7 +26,7 @@ const CpuArchitecture = ({
 }: CpuArchitectureSvgProps) => {
   return (
     <svg
-      className={cn("text-muted", className)}
+      className={cn('text-muted', className)}
       width={width}
       height={height}
       viewBox="0 0 200 100"
@@ -41,17 +41,9 @@ const CpuArchitecture = ({
         markerStart="url(#cpu-circle-marker)"
       >
         {/* 1st */}
-        <path
-          strokeDasharray="100 100"
-          pathLength="100"
-          d="M 10 20 h 79.5 q 5 0 5 5 v 30"
-        />
+        <path strokeDasharray="100 100" pathLength="100" d="M 10 20 h 79.5 q 5 0 5 5 v 30" />
         {/* 2nd */}
-        <path
-          strokeDasharray="100 100"
-          pathLength="100"
-          d="M 180 10 h -69.7 q -5 0 -5 5 v 30"
-        />
+        <path strokeDasharray="100 100" pathLength="100" d="M 180 10 h -69.7 q -5 0 -5 5 v 30" />
         {/* 3rd */}
         <path d="M 130 20 v 21.8 q 0 5 -5 5 h -10" />
         {/* 4th */}
@@ -235,7 +227,7 @@ const CpuArchitecture = ({
           x="92"
           y="52.5"
           fontSize="7"
-          fill={animateText ? "url(#cpu-text-gradient)" : "white"}
+          fill={animateText ? 'url(#cpu-text-gradient)' : 'white'}
           fontWeight="600"
           letterSpacing="0.05em"
         >
@@ -245,32 +237,16 @@ const CpuArchitecture = ({
       {/* Masks */}
       <defs>
         <mask id="cpu-mask-1">
-          <path
-            d="M 10 20 h 79.5 q 5 0 5 5 v 24"
-            strokeWidth="0.5"
-            stroke="white"
-          />
+          <path d="M 10 20 h 79.5 q 5 0 5 5 v 24" strokeWidth="0.5" stroke="white" />
         </mask>
         <mask id="cpu-mask-2">
-          <path
-            d="M 180 10 h -69.7 q -5 0 -5 5 v 24"
-            strokeWidth="0.5"
-            stroke="white"
-          />
+          <path d="M 180 10 h -69.7 q -5 0 -5 5 v 24" strokeWidth="0.5" stroke="white" />
         </mask>
         <mask id="cpu-mask-3">
-          <path
-            d="M 130 20 v 21.8 q 0 5 -5 5 h -10"
-            strokeWidth="0.5"
-            stroke="white"
-          />
+          <path d="M 130 20 v 21.8 q 0 5 -5 5 h -10" strokeWidth="0.5" stroke="white" />
         </mask>
         <mask id="cpu-mask-4">
-          <path
-            d="M 170 80 v -21.8 q 0 -5 -5 -5 h -50"
-            strokeWidth="0.5"
-            stroke="white"
-          />
+          <path d="M 170 80 v -21.8 q 0 -5 -5 -5 h -50" strokeWidth="0.5" stroke="white" />
         </mask>
         <mask id="cpu-mask-5">
           <path
@@ -290,11 +266,7 @@ const CpuArchitecture = ({
           />
         </mask>
         <mask id="cpu-mask-8">
-          <path
-            d="M 30 30 h 25 q 5 0 5 5 v 6.5 q 0 5 5 5 h 20"
-            strokeWidth="0.5"
-            stroke="white"
-          />
+          <path d="M 30 30 h 25 q 5 0 5 5 v 6.5 q 0 5 5 5 h 20" strokeWidth="0.5" stroke="white" />
         </mask>
         {/* Gradients */}
         <radialGradient id="cpu-blue-grad" fx="1">
@@ -332,20 +304,8 @@ const CpuArchitecture = ({
           <stop offset="0%" stopColor="#f43f5e" />
           <stop offset="100%" stopColor="transparent" />
         </radialGradient>
-        <filter
-          id="cpu-light-shadow"
-          x="-50%"
-          y="-50%"
-          width="200%"
-          height="200%"
-        >
-          <feDropShadow
-            dx="1.5"
-            dy="1.5"
-            stdDeviation="1"
-            floodColor="black"
-            floodOpacity="0.1"
-          />
+        <filter id="cpu-light-shadow" x="-50%" y="-50%" width="200%" height="200%">
+          <feDropShadow dx="1.5" dy="1.5" stdDeviation="1" floodColor="black" floodOpacity="0.1" />
         </filter>
         <marker
           id="cpu-circle-marker"
@@ -364,19 +324,11 @@ const CpuArchitecture = ({
             stroke="#232323"
             strokeWidth="0.5"
           >
-            {animateMarkers && (
-              <animate attributeName="r" values="0; 3; 2" dur="0.5s" />
-            )}
+            {animateMarkers && <animate attributeName="r" values="0; 3; 2" dur="0.5s" />}
           </circle>
         </marker>
         {/* Cpu connection gradient */}
-        <linearGradient
-          id="cpu-connection-gradient"
-          x1="0"
-          y1="0"
-          x2="0"
-          y2="1"
-        >
+        <linearGradient id="cpu-connection-gradient" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#4F4F4F" />
           <stop offset="60%" stopColor="#121214" />
         </linearGradient>

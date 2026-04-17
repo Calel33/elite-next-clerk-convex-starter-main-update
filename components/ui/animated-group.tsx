@@ -115,19 +115,13 @@ function AnimatedGroup({
   const containerVariants = variants?.container || selectedVariants.container;
   const itemVariants = variants?.item || selectedVariants.item;
 
-  const MotionComponent = React.useMemo(
-    () => motion.create(as as any),
-    [as]
-  );
-  const MotionChild = React.useMemo(
-    () => motion.create(asChild as any),
-    [asChild]
-  );
+  const MotionComponent = React.useMemo(() => motion.create(as as any), [as]);
+  const MotionChild = React.useMemo(() => motion.create(asChild as any), [asChild]);
 
   return (
     <MotionComponent
-      initial='hidden'
-      animate='visible'
+      initial="hidden"
+      animate="visible"
       variants={containerVariants}
       className={className}
     >

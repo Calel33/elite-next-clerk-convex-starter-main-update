@@ -4,7 +4,6 @@ A modern, production-ready SaaS starter template for building full-stack applica
 
 [🌐 Live Demo](https://elite-next-clerk-convex-starter.vercel.app/) – Try the app in your browser!
 
-
 ## Features
 
 - 🚀 **Next.js 16 with App Router** - Latest React framework with server components
@@ -28,6 +27,7 @@ A modern, production-ready SaaS starter template for building full-stack applica
 ## Tech Stack
 
 ### Frontend
+
 - **Next.js 16** - React framework with App Router
 - **React 19** - Latest React with enhanced features
 - **TailwindCSS v4** - Utility-first CSS framework
@@ -40,12 +40,14 @@ A modern, production-ready SaaS starter template for building full-stack applica
 - **React Bits** - Custom animation components
 
 ### Backend & Services
+
 - **Convex** - Real-time database and serverless functions
 - **Clerk** - Authentication and user management
 - **Clerk Billing** - Subscription billing and payments
 - **Svix** - Webhook handling and validation
 
 ### Development & Deployment
+
 - **TypeScript** - Type safety throughout
 - **Vercel** - Deployment platform
 - **Turbopack** - Fast build tool
@@ -54,7 +56,7 @@ A modern, production-ready SaaS starter template for building full-stack applica
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - Clerk account for authentication and billing
 - Convex account for database
 
@@ -125,7 +127,7 @@ NEXT_PUBLIC_CLERK_FRONTEND_API_URL=https://your-clerk-frontend-api-url.clerk.acc
      - `paymentAttempt.updated` - Tracks subscription payments
    - Copy the webhook signing secret (starts with `whsec_`)
    - Add it to your Convex dashboard environment variables as `CLERK_WEBHOOK_SECRET`
-   
+
    **Note**: The webhook URL `/clerk-users-webhook` is handled by Convex's HTTP router, not Next.js. Svix is used to verify webhook signatures for security.
 
 8. Configure Clerk Billing:
@@ -145,12 +147,14 @@ Your application will be available at `http://localhost:3000`.
 ## Architecture
 
 ### Key Routes
+
 - `/` - Beautiful landing page with pricing
 - `/dashboard` - Protected user dashboard
 - `/dashboard/payment-gated` - Subscription-protected content
 - `/clerk-users-webhook` - Clerk webhook handler
 
 ### Authentication Flow
+
 - Seamless sign-up/sign-in with Clerk
 - Automatic user sync to Convex database
 - Protected routes with middleware
@@ -158,12 +162,14 @@ Your application will be available at `http://localhost:3000`.
 - Automatic redirects to dashboard after auth
 
 ### Payment Flow
+
 - Custom Clerk pricing table component
 - Subscription-based access control
 - Real-time payment status updates
 - Webhook-driven payment tracking
 
 ### Database Schema
+
 ```typescript
 // Users table
 users: {
@@ -214,6 +220,7 @@ paymentAttempts: {
 ## Key Components
 
 ### Landing Page
+
 - **Hero Section** - Animated hero with CTAs
 - **Features Section** - Interactive feature showcase
 - **Pricing Table** - Custom Clerk billing integration
@@ -222,12 +229,14 @@ paymentAttempts: {
 - **Footer** - Links and information
 
 ### Dashboard
+
 - **Sidebar Navigation** - Collapsible sidebar with user menu
 - **Interactive Charts** - Data visualization with Recharts
 - **Data Tables** - Sortable and filterable tables
 - **Payment Gating** - Subscription-based access control
 
 ### Animations & Effects
+
 - **Splash Cursor** - Interactive cursor effects
 - **Animated Lists** - Smooth list animations
 - **Progressive Blur** - Modern blur effects
@@ -269,6 +278,7 @@ The starter kit includes a fully customizable theme system. You can customize co
 3. Deploy automatically on push to main branch
 
 The project is optimized for Vercel with:
+
 - Automatic builds with Turbopack
 - Environment variable management
 - Edge function support
@@ -285,16 +295,19 @@ npm start
 ## Customization
 
 ### Styling
+
 - Modify `app/globals.css` for global styles
 - Update TailwindCSS configuration
 - Customize component themes in `components/ui/`
 
 ### Branding
+
 - Update logo in `components/logo.tsx`
 - Modify metadata in `app/layout.tsx`
 - Customize color scheme in CSS variables
 
 ### Features
+
 - Add new dashboard pages in `app/dashboard/`
 - Extend database schema in `convex/schema.ts`
 - Create custom components in `components/`

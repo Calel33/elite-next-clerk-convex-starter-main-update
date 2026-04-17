@@ -1,6 +1,6 @@
-"use client"
+'use client';
 
-import * as React from "react"
+import * as React from 'react';
 import {
   IconCamera,
   IconChartBar,
@@ -20,12 +20,12 @@ import {
   IconUsers,
   IconSparkles,
   IconBrandOpenai,
-} from "@tabler/icons-react"
+} from '@tabler/icons-react';
 
-import { NavDocuments } from "@/app/dashboard/nav-documents"
-import { NavMain } from "@/app/dashboard/nav-main"
-import { NavSecondary } from "@/app/dashboard/nav-secondary"
-import { NavUser } from "@/app/dashboard/nav-user"
+import { NavDocuments } from '@/app/dashboard/nav-documents';
+import { NavMain } from '@/app/dashboard/nav-main';
+import { NavSecondary } from '@/app/dashboard/nav-secondary';
+import { NavUser } from '@/app/dashboard/nav-user';
 import {
   Sidebar,
   SidebarContent,
@@ -34,59 +34,59 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import { ChatMaxingIconColoured } from "@/components/logo"
-import { Badge } from "@/components/ui/badge"
-import Link from "next/link"
+} from '@/components/ui/sidebar';
+import { ChatMaxingIconColoured } from '@/components/logo';
+import { Badge } from '@/components/ui/badge';
+import Link from 'next/link';
 
 const data = {
   navMain: [
     {
-      title: "Dashboard",
-      url: "/dashboard",
+      title: 'Dashboard',
+      url: '/dashboard',
       icon: IconDashboard,
     },
     {
-      title: "Payment gated",
-      url: "/dashboard/payment-gated",
+      title: 'Payment gated',
+      url: '/dashboard/payment-gated',
       icon: IconSparkles,
     },
   ],
   navSecondary: [
     {
-      title: "Settings",
-      url: "#",
+      title: 'Settings',
+      url: '#',
       icon: IconSettings,
     },
     {
-      title: "Get Help",
-      url: "#",
+      title: 'Get Help',
+      url: '#',
       icon: IconHelp,
     },
     {
-      title: "Search",
-      url: "#",
+      title: 'Search',
+      url: '#',
       icon: IconSearch,
     },
   ],
   documents: [
     {
-      name: "Data Library",
-      url: "#",
+      name: 'Data Library',
+      url: '#',
       icon: IconDatabase,
     },
     {
-      name: "Reports",
-      url: "#",
+      name: 'Reports',
+      url: '#',
       icon: IconReport,
     },
     {
-      name: "Word Assistant",
-      url: "#",
+      name: 'Word Assistant',
+      url: '#',
       icon: IconFileWord,
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -94,14 +94,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
-            >
+            <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
               <Link href="/">
                 <ChatMaxingIconColoured className="!size-6" />
                 <span className="text-base font-semibold">Starter DIY</span>
-                <Badge variant="outline" className="text-muted-foreground  text-xs">Demo</Badge>
+                <Badge variant="outline" className="text-muted-foreground  text-xs">
+                  Demo
+                </Badge>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -116,5 +115,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavUser />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

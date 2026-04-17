@@ -21,6 +21,7 @@ Your goal is to create prompts that get things done accurately and efficiently.
 <process>
 
 <step_0_intake_gate>
+
 <title>Adaptive Requirements Gathering</title>
 
 <critical_first_action>
@@ -52,11 +53,12 @@ Analyze the user's description to extract and infer:
 - **Depth needed**: Standard vs extended thinking triggers
 
 Inference rules:
+
 - Dashboard/feature with multiple components → likely multiple prompts
 - Bug fix with clear location → single prompt, simple
 - "Optimize" or "refactor" → needs specificity about what/where
 - Authentication, payments, complex features → complex, needs context
-</adaptive_analysis>
+  </adaptive_analysis>
 
 <contextual_questioning>
 Generate 2-4 questions using AskUserQuestion based ONLY on genuine gaps.
@@ -64,6 +66,7 @@ Generate 2-4 questions using AskUserQuestion based ONLY on genuine gaps.
 <question_templates>
 
 **For ambiguous scope** (e.g., "build a dashboard"):
+
 - header: "Dashboard type"
 - question: "What kind of dashboard is this?"
 - options:
@@ -72,6 +75,7 @@ Generate 2-4 questions using AskUserQuestion based ONLY on genuine gaps.
   - "User-facing dashboard" - End-user features, personal data, settings
 
 **For unclear target** (e.g., "fix the bug"):
+
 - header: "Bug location"
 - question: "Where does this bug occur?"
 - options:
@@ -80,6 +84,7 @@ Generate 2-4 questions using AskUserQuestion based ONLY on genuine gaps.
   - "Database" - Queries, migrations, data integrity
 
 **For auth/security tasks**:
+
 - header: "Auth method"
 - question: "What authentication approach?"
 - options:
@@ -88,6 +93,7 @@ Generate 2-4 questions using AskUserQuestion based ONLY on genuine gaps.
   - "OAuth/SSO" - Third-party providers, enterprise
 
 **For performance tasks**:
+
 - header: "Performance focus"
 - question: "What's the main performance concern?"
 - options:
@@ -96,6 +102,7 @@ Generate 2-4 questions using AskUserQuestion based ONLY on genuine gaps.
   - "Database" - Query optimization, indexing, caching
 
 **For output/deliverable clarity**:
+
 - header: "Output purpose"
 - question: "What will this be used for?"
 - options:
@@ -106,13 +113,14 @@ Generate 2-4 questions using AskUserQuestion based ONLY on genuine gaps.
 </question_templates>
 
 <question_rules>
+
 - Only ask about genuine gaps - don't ask what's already stated
 - Each option needs a description explaining implications
 - Prefer options over free-text when choices are knowable
 - User can always select "Other" for custom input
 - 2-4 questions max per round
-</question_rules>
-</contextual_questioning>
+  </question_rules>
+  </contextual_questioning>
 
 <decision_gate>
 After receiving answers, present decision gate using AskUserQuestion:
@@ -139,6 +147,7 @@ Then proceed to generation.
 </step_0_intake_gate>
 
 <step_1_generate_and_save>
+
 <title>Generate and Save Prompts</title>
 
 <pre_generation_analysis>
@@ -162,7 +171,7 @@ Before generating, determine:
    - "Go beyond basics" for ambitious work?
    - WHY explanations for constraints?
    - Examples for ambiguous requirements?
-</pre_generation_analysis>
+     </pre_generation_analysis>
 
 Create the prompt(s) and save to the prompts folder.
 
@@ -323,6 +332,7 @@ Before completing, verify:
 - [Sources are credible and relevant]
 </verification>
 ```
+
 </prompt_patterns>
 </step_1_generate_and_save>
 
@@ -337,7 +347,6 @@ Before completing, verify:
 4. **Scope Assessment**: Simple tasks get concise prompts. Complex tasks get comprehensive structure with extended thinking triggers.
 
 5. **Context Loading**: Only request file reading when the task explicitly requires understanding existing code. Use patterns like:
-
    - "Examine @package.json for dependencies" (when adding new packages)
    - "Review @src/database/\* for schema" (when modifying data layer)
    - Skip file reading for greenfield features
@@ -345,7 +354,6 @@ Before completing, verify:
 6. **Precision vs Brevity**: Default to precision. A longer, clear prompt beats a short, ambiguous one.
 
 7. **Tool Integration**:
-
    - Include MCP servers only when explicitly mentioned or obviously needed
    - Use bash commands for environment checking when state matters
    - File references should be specific, not broad wildcards
@@ -354,7 +362,7 @@ Before completing, verify:
 8. **Output Clarity**: Every prompt must specify exactly where to save outputs using relative paths
 
 9. **Verification Always**: Every prompt should include clear success criteria and verification steps
-</intelligence_rules>
+   </intelligence_rules>
 
 <decision_tree>
 After saving the prompt(s), present this decision tree to the user:
@@ -444,6 +452,7 @@ If user chooses #2, invoke via SlashCommand tool: `/run-prompt 005`
 </process>
 
 <success_criteria>
+
 - Intake gate completed (AskUserQuestion used for clarification if needed)
 - User selected "Proceed" from decision gate
 - Appropriate depth, structure, and execution strategy determined
@@ -451,7 +460,7 @@ If user chooses #2, invoke via SlashCommand tool: `/run-prompt 005`
 - Files saved to ./prompts/[number]-[name].md with correct sequential numbering
 - Decision tree presented to user based on single/parallel/sequential scenario
 - User choice executed (SlashCommand invoked if user selects run option)
-</success_criteria>
+  </success_criteria>
 
 <meta_instructions>
 
@@ -465,4 +474,4 @@ If user chooses #2, invoke via SlashCommand tool: `/run-prompt 005`
 - Each prompt file should contain ONLY the prompt content, no preamble or explanation
 - After saving, present the decision tree as inline text (not AskUserQuestion)
 - Use the SlashCommand tool to invoke /run-prompt when user makes their choice
-</meta_instructions>
+  </meta_instructions>

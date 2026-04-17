@@ -8,30 +8,30 @@ Estimated effort for full migration (including testing) is roughly 1–2 focused
 
 The table below covers the primary runtime dependencies. Versions and latest tags are based on the local `npm outdated --json` output and current official docs at the time of this report.
 
-| Package | Current | Latest / Target | Type | Breaking Changes / Notes | Security Issues |
-|--------|---------|-----------------|------|--------------------------|-----------------|
-| `next` | 15.3.5 | 16.1.0 | **major** | Next.js 16 promotes Turbopack to default, fully removes sync Dynamic APIs (cookies/headers/params/searchParams), tightens async request APIs, changes turbopack config location, and updates Node/TS minimums. Check for any sync `cookies/headers/draftMode` usage and custom webpack config. | npm audit flags multiple issues in 15.x including critical RCE in React flight protocol (GHSA-9qr9-h5gf-34mp) and DoS and image‑related vulnerabilities; upgrade to >=16.x to remediate and track Next.js security advisories. |
-| `react` | ^19.0.0 | ^19.2.3 | minor | React 19.2 includes new features (View Transitions, `useEffectEvent`, Activity) and continued canary stabilization; no template‑specific breaking changes, but ensure any experimental APIs align with Next.js 16 support. | Covered indirectly by React Server Components / RSC vulnerabilities – keep React at current patched 19.x and follow framework guidance. |
-| `react-dom` | ^19.0.0 | ^19.2.3 | minor | Matches React core; no additional template‑specific breakage expected. | Same as React. |
-| `@clerk/nextjs` | ^6.24.0 | ^6.36.4 | minor | v6 already adopted but latest patch adds improvements and bugfixes; key v6 breaking changes vs earlier include async `auth()`, async `clerkClient()`, `auth.protect()` instead of `auth().protect()`, and static rendering by default unless `dynamic` is set on `ClerkProvider`. The current middleware pattern already matches the v6 async style. | No specific CVEs surfaced, but staying current is recommended for auth/security patches. |
-| `@clerk/backend` | ^2.4.1 | ^2.28.0 | minor | Backend helper updates; review any backend code using `clerkClient` and `verifyToken` if added later. | Same as above. |
-| `@clerk/themes` | ^2.2.55 | ^2.4.45 | minor | Design/UX updates to hosted components; may require small appearance/localization tweaks if you heavily customize Clerk themes. | None known. |
-| `convex` | ^1.25.2 | ^1.31.2 | **minor/feature** | Convex client/server have continued to refine TypeScript types, React integration, and auth providers; Next.js + Clerk example now strongly encourages `ConvexProviderWithClerk` and `useConvexAuth`. The current template already uses the recommended `ConvexProviderWithClerk` wrapper and `auth.config.ts`, so breakage risk is low but review changelog for any auth/type tightening. | No public high‑severity CVEs; keep current for general security posture. |
-| `@radix-ui/react-*` | 1.1.x / 2.2.5 | Latest 1.x / 2.x | patch/minor | Radix added React 19 and RSC compatibility, bugfixes for forms, tooltips, and accessibility; no major API changes for the primitives used here (Avatar, Checkbox, Dialog, DropdownMenu, Label, Select, Separator, Slot, Switch, Tabs, Toggle, ToggleGroup, Tooltip). Validate interactive components visually after upgrade. | None known; primarily quality/accessibility fixes. |
-| `tailwindcss` | ^4 | ^4.1.x | minor | Tailwind v4 is already in use; latest 4.1.x adds performance improvements and small API refinements. Major breaking changes from 3.x (CSS‑first config, new engine, theme variables) are already adopted. | None known; keep current for engine and PostCSS fixes. |
-| `@tailwindcss/postcss` | ^4 | ^4.1.x | minor | Tracks Tailwind core; ensure PostCSS config matches latest docs. | None known. |
-| `lucide-react` | ^0.525.0 | ^0.562.0 | minor | Icon additions/updates; no breaking changes expected for existing icons. | None known. |
-| `recharts` | ^2.15.4 | ^3.6.0 | **major** | v3 modernizes chart APIs and may introduce breaking changes around component props and internal layout; audit dashboard chart usage in `app/dashboard/chart-area-interactive` before upgrading. Consider deferring this if migration cost is high and security risk is low. | No widely reported security issues; primarily a DX/perf update. |
-| `zod` | ^3.25.76 | ^4.2.1 | **major** | Zod 4 introduces breaking type and API changes; upgrade requires touching any schema/validation code. This template appears to use Zod lightly; review all `zod` imports (e.g. in schemas or API validation) before bumping to v4. | No critical CVEs known; upgrade mainly for features and DX. |
-| `framer-motion` | ^12.23.3 | ^12.23.26 | patch | Small bugfixes/perf improvements; no breaking changes expected. | None known. |
-| `motion` | ^12.23.0 | ^12.23.26 | patch | Animation helpers aligned with framer‑motion; safe patch bump. | None known. |
-| `@tabler/icons-react` | ^3.34.0 | ^3.36.0 | patch | Icon additions/bugfixes only. | None known. |
-| `sonner` | ^2.0.6 | ^2.0.7 | patch | Toast notification fixes; non‑breaking. | None known. |
-| `svix` | ^1.69.0 | ^1.82.0 | minor | Webhook client improvements; check any webhook usage if added beyond starter defaults. | Review Svix advisories if you expose webhooks heavily; no specific CVEs surfaced in this audit. |
-| `tailwind-merge` | ^3.3.1 | ^3.4.0 | minor | Better class merge behavior; safe upgrade. | None known. |
-| `next-themes` | ^0.4.6 | ^0.4.6 | none | Already current. | None known. |
-| `@tanstack/react-table` | ^8.21.3 | ^8.21.3 | none | Already current. | None known. |
-| `@dnd-kit/*` | As in package.json | latest matches | none | Current versions already match latest per `npm outdated`; no changes required. | None known. |
+| Package                 | Current            | Latest / Target  | Type              | Breaking Changes / Notes                                                                                                                                                                                                                                                                                                                                                                   | Security Issues                                                                                                                                                                                                                |
+| ----------------------- | ------------------ | ---------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `next`                  | 15.3.5             | 16.1.0           | **major**         | Next.js 16 promotes Turbopack to default, fully removes sync Dynamic APIs (cookies/headers/params/searchParams), tightens async request APIs, changes turbopack config location, and updates Node/TS minimums. Check for any sync `cookies/headers/draftMode` usage and custom webpack config.                                                                                             | npm audit flags multiple issues in 15.x including critical RCE in React flight protocol (GHSA-9qr9-h5gf-34mp) and DoS and image‑related vulnerabilities; upgrade to >=16.x to remediate and track Next.js security advisories. |
+| `react`                 | ^19.0.0            | ^19.2.3          | minor             | React 19.2 includes new features (View Transitions, `useEffectEvent`, Activity) and continued canary stabilization; no template‑specific breaking changes, but ensure any experimental APIs align with Next.js 16 support.                                                                                                                                                                 | Covered indirectly by React Server Components / RSC vulnerabilities – keep React at current patched 19.x and follow framework guidance.                                                                                        |
+| `react-dom`             | ^19.0.0            | ^19.2.3          | minor             | Matches React core; no additional template‑specific breakage expected.                                                                                                                                                                                                                                                                                                                     | Same as React.                                                                                                                                                                                                                 |
+| `@clerk/nextjs`         | ^6.24.0            | ^6.36.4          | minor             | v6 already adopted but latest patch adds improvements and bugfixes; key v6 breaking changes vs earlier include async `auth()`, async `clerkClient()`, `auth.protect()` instead of `auth().protect()`, and static rendering by default unless `dynamic` is set on `ClerkProvider`. The current middleware pattern already matches the v6 async style.                                       | No specific CVEs surfaced, but staying current is recommended for auth/security patches.                                                                                                                                       |
+| `@clerk/backend`        | ^2.4.1             | ^2.28.0          | minor             | Backend helper updates; review any backend code using `clerkClient` and `verifyToken` if added later.                                                                                                                                                                                                                                                                                      | Same as above.                                                                                                                                                                                                                 |
+| `@clerk/themes`         | ^2.2.55            | ^2.4.45          | minor             | Design/UX updates to hosted components; may require small appearance/localization tweaks if you heavily customize Clerk themes.                                                                                                                                                                                                                                                            | None known.                                                                                                                                                                                                                    |
+| `convex`                | ^1.25.2            | ^1.31.2          | **minor/feature** | Convex client/server have continued to refine TypeScript types, React integration, and auth providers; Next.js + Clerk example now strongly encourages `ConvexProviderWithClerk` and `useConvexAuth`. The current template already uses the recommended `ConvexProviderWithClerk` wrapper and `auth.config.ts`, so breakage risk is low but review changelog for any auth/type tightening. | No public high‑severity CVEs; keep current for general security posture.                                                                                                                                                       |
+| `@radix-ui/react-*`     | 1.1.x / 2.2.5      | Latest 1.x / 2.x | patch/minor       | Radix added React 19 and RSC compatibility, bugfixes for forms, tooltips, and accessibility; no major API changes for the primitives used here (Avatar, Checkbox, Dialog, DropdownMenu, Label, Select, Separator, Slot, Switch, Tabs, Toggle, ToggleGroup, Tooltip). Validate interactive components visually after upgrade.                                                               | None known; primarily quality/accessibility fixes.                                                                                                                                                                             |
+| `tailwindcss`           | ^4                 | ^4.1.x           | minor             | Tailwind v4 is already in use; latest 4.1.x adds performance improvements and small API refinements. Major breaking changes from 3.x (CSS‑first config, new engine, theme variables) are already adopted.                                                                                                                                                                                  | None known; keep current for engine and PostCSS fixes.                                                                                                                                                                         |
+| `@tailwindcss/postcss`  | ^4                 | ^4.1.x           | minor             | Tracks Tailwind core; ensure PostCSS config matches latest docs.                                                                                                                                                                                                                                                                                                                           | None known.                                                                                                                                                                                                                    |
+| `lucide-react`          | ^0.525.0           | ^0.562.0         | minor             | Icon additions/updates; no breaking changes expected for existing icons.                                                                                                                                                                                                                                                                                                                   | None known.                                                                                                                                                                                                                    |
+| `recharts`              | ^2.15.4            | ^3.6.0           | **major**         | v3 modernizes chart APIs and may introduce breaking changes around component props and internal layout; audit dashboard chart usage in `app/dashboard/chart-area-interactive` before upgrading. Consider deferring this if migration cost is high and security risk is low.                                                                                                                | No widely reported security issues; primarily a DX/perf update.                                                                                                                                                                |
+| `zod`                   | ^3.25.76           | ^4.2.1           | **major**         | Zod 4 introduces breaking type and API changes; upgrade requires touching any schema/validation code. This template appears to use Zod lightly; review all `zod` imports (e.g. in schemas or API validation) before bumping to v4.                                                                                                                                                         | No critical CVEs known; upgrade mainly for features and DX.                                                                                                                                                                    |
+| `framer-motion`         | ^12.23.3           | ^12.23.26        | patch             | Small bugfixes/perf improvements; no breaking changes expected.                                                                                                                                                                                                                                                                                                                            | None known.                                                                                                                                                                                                                    |
+| `motion`                | ^12.23.0           | ^12.23.26        | patch             | Animation helpers aligned with framer‑motion; safe patch bump.                                                                                                                                                                                                                                                                                                                             | None known.                                                                                                                                                                                                                    |
+| `@tabler/icons-react`   | ^3.34.0            | ^3.36.0          | patch             | Icon additions/bugfixes only.                                                                                                                                                                                                                                                                                                                                                              | None known.                                                                                                                                                                                                                    |
+| `sonner`                | ^2.0.6             | ^2.0.7           | patch             | Toast notification fixes; non‑breaking.                                                                                                                                                                                                                                                                                                                                                    | None known.                                                                                                                                                                                                                    |
+| `svix`                  | ^1.69.0            | ^1.82.0          | minor             | Webhook client improvements; check any webhook usage if added beyond starter defaults.                                                                                                                                                                                                                                                                                                     | Review Svix advisories if you expose webhooks heavily; no specific CVEs surfaced in this audit.                                                                                                                                |
+| `tailwind-merge`        | ^3.3.1             | ^3.4.0           | minor             | Better class merge behavior; safe upgrade.                                                                                                                                                                                                                                                                                                                                                 | None known.                                                                                                                                                                                                                    |
+| `next-themes`           | ^0.4.6             | ^0.4.6           | none              | Already current.                                                                                                                                                                                                                                                                                                                                                                           | None known.                                                                                                                                                                                                                    |
+| `@tanstack/react-table` | ^8.21.3            | ^8.21.3          | none              | Already current.                                                                                                                                                                                                                                                                                                                                                                           | None known.                                                                                                                                                                                                                    |
+| `@dnd-kit/*`            | As in package.json | latest matches   | none              | Current versions already match latest per `npm outdated`; no changes required.                                                                                                                                                                                                                                                                                                             | None known.                                                                                                                                                                                                                    |
 
 DevDependencies (`typescript`, `@types/*`, `tw-animate-css`) are already specified with `^` ranges targeting the latest major lines compatible with React 19 and Next 16. You can optionally pin them to their exact latest patch versions when performing the migration, but this is not strictly required for security.
 
@@ -318,13 +318,13 @@ export default async function Page(props: PageProps<"/dashboard/[id]"><?>) {
 
 ```ts
 // app/api/example/route.ts
-import { cookies, headers } from "next/headers";
+import { cookies, headers } from 'next/headers';
 
 export async function GET() {
   const cookieStore = await cookies();
   const headerStore = await headers();
   // ...
-  return new Response("ok");
+  return new Response('ok');
 }
 ```
 
@@ -345,9 +345,9 @@ export async function GET() {
 
 ```ts
 // middleware.ts
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
 
-const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
+const isProtectedRoute = createRouteMatcher(['/dashboard(.*)']);
 
 export default clerkMiddleware(async (auth, req) => {
   if (isProtectedRoute(req)) await auth.protect();
@@ -355,8 +355,8 @@ export default clerkMiddleware(async (auth, req) => {
 
 export const config = {
   matcher: [
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    "/(api|trpc)(.*)",
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    '/(api|trpc)(.*)',
   ],
 };
 ```
@@ -365,11 +365,11 @@ export const config = {
 
 ```ts
 // app/api/me/route.ts
-import { auth } from "@clerk/nextjs/server";
+import { auth } from '@clerk/nextjs/server';
 
 export async function GET() {
   const { userId } = await auth();
-  if (!userId) return new Response("Unauthorized", { status: 401 });
+  if (!userId) return new Response('Unauthorized', { status: 401 });
   return Response.json({ userId });
 }
 ```
@@ -413,9 +413,9 @@ export default function ConvexClientProvider({ children }: { children: ReactNode
 
 ```tsx
 // app/layout.tsx
-import { ClerkProvider } from "@clerk/nextjs";
-import ConvexClientProvider from "@/components/ConvexClientProvider";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ClerkProvider } from '@clerk/nextjs';
+import ConvexClientProvider from '@/components/ConvexClientProvider';
+import { ThemeProvider } from '@/components/theme-provider';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -435,8 +435,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 **Auth‑aware UI using Convex helpers and Clerk buttons:**
 
 ```tsx
-import { Authenticated, Unauthenticated, AuthLoading } from "convex/react";
-import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import { Authenticated, Unauthenticated, AuthLoading } from 'convex/react';
+import { SignInButton, SignUpButton, UserButton } from '@clerk/nextjs';
 
 export function HeaderAuth() {
   return (
@@ -462,7 +462,7 @@ export function HeaderAuth() {
 
 ```css
 /* app/globals.css */
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --spacing: 0.25rem;
@@ -475,9 +475,7 @@ export function HeaderAuth() {
 
 ```tsx
 <div className="@container/main flex flex-1 flex-col gap-2">
-  <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-    {children}
-  </div>
+  <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">{children}</div>
   {/* ... */}
 </div>
 ```

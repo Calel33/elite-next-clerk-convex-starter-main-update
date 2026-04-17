@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface TextCursorProps {
   text: string;
@@ -23,7 +23,7 @@ interface TrailItem {
 }
 
 const TextCursor: React.FC<TextCursorProps> = ({
-  text = "⚛️",
+  text = '⚛️',
   delay = 0.01,
   spacing = 100,
   followMouseDirection = true,
@@ -97,8 +97,8 @@ const TextCursor: React.FC<TextCursorProps> = ({
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
-    container.addEventListener("mousemove", handleMouseMove);
-    return () => container.removeEventListener("mousemove", handleMouseMove);
+    container.addEventListener('mousemove', handleMouseMove);
+    return () => container.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   useEffect(() => {
@@ -124,34 +124,30 @@ const TextCursor: React.FC<TextCursorProps> = ({
                 x: randomFloat ? [0, item.randomX || 0, 0] : 0,
                 y: randomFloat ? [0, item.randomY || 0, 0] : 0,
                 rotate: randomFloat
-                  ? [
-                      item.angle,
-                      item.angle + (item.randomRotate || 0),
-                      item.angle,
-                    ]
+                  ? [item.angle, item.angle + (item.randomRotate || 0), item.angle]
                   : item.angle,
               }}
               exit={{ opacity: 0, scale: 0 }}
               transition={{
-                opacity: { duration: exitDuration, ease: "easeOut", delay },
+                opacity: { duration: exitDuration, ease: 'easeOut', delay },
                 ...(randomFloat && {
                   x: {
                     duration: 2,
-                    ease: "easeInOut",
+                    ease: 'easeInOut',
                     repeat: Infinity,
-                    repeatType: "mirror",
+                    repeatType: 'mirror',
                   },
                   y: {
                     duration: 2,
-                    ease: "easeInOut",
+                    ease: 'easeInOut',
                     repeat: Infinity,
-                    repeatType: "mirror",
+                    repeatType: 'mirror',
                   },
                   rotate: {
                     duration: 2,
-                    ease: "easeInOut",
+                    ease: 'easeInOut',
                     repeat: Infinity,
-                    repeatType: "mirror",
+                    repeatType: 'mirror',
                   },
                 }),
               }}

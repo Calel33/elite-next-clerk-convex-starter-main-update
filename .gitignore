@@ -40,3 +40,32 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS temp files
+.cursor/
+.swarm/
+
+# Environment config
+.env.local
+.env.*.local
+
+# Build artifacts
+dist/
+.turbo/
+
+# Windows special files
+nul
+con
+prn
+aux
+lpt*
+com*
+
+# Husky hooks (maintained separately)
+.husky/

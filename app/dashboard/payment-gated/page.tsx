@@ -1,5 +1,5 @@
-import { Protect } from '@clerk/nextjs'
-import CustomClerkPricing from "@/components/custom-clerk-pricing";
+import { Protect } from '@clerk/nextjs';
+import CustomClerkPricing from '@/components/custom-clerk-pricing';
 
 function UpgradeCard() {
   return (
@@ -12,9 +12,8 @@ function UpgradeCard() {
         <CustomClerkPricing />
       </div>
     </>
-  )
+  );
 }
-
 
 function FeaturesCard() {
   return (
@@ -25,28 +24,25 @@ function FeaturesCard() {
         </div>
         <div className="rounded-lg border bg-card p-6">
           <h2 className="text-lg font-semibold mb-4">Page with advanced features</h2>
-            <p className="text-muted-foreground">
-              Access to advanced features.
-            </p>
-          </div>
+          <p className="text-muted-foreground">Access to advanced features.</p>
         </div>
       </div>
-    )
+    </div>
+  );
 }
-
 
 export default function TeamPage() {
   return (
     <Protect
-    condition={(has) => {
-      // Check if user has any of the paid plans
-      // return has({ plan: "starter" }) || has({ plan: "hobby" }) || has({ plan: "pro" })
-      // Or alternatively, check if user doesn't have free plan (if free plan exists)
-      return !has({ plan: "free_user" })
-    }}
-      fallback={<UpgradeCard/>}
+      condition={(has) => {
+        // Check if user has any of the paid plans
+        // return has({ plan: "starter" }) || has({ plan: "hobby" }) || has({ plan: "pro" })
+        // Or alternatively, check if user doesn't have free plan (if free plan exists)
+        return !has({ plan: 'free_user' });
+      }}
+      fallback={<UpgradeCard />}
     >
       <FeaturesCard />
     </Protect>
-  )
-} 
+  );
+}

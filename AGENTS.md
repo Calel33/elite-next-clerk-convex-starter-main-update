@@ -221,6 +221,7 @@ All code is automatically linted to ensure quality and consistency:
 npm run lint              # Run ESLint checks (complexity, file size, naming conventions)
 npm run lint:dead-code    # Run knip to detect unused exports and dead code
 npm run lint:duplicates   # Run jscpd to detect code duplication
+npm run lint:tech-debt    # Scan for unlinked TODO/FIXME comments
 npm run format            # Auto-format code with Prettier
 npm run format:check      # Check formatting without changes
 ```
@@ -228,7 +229,7 @@ npm run format:check      # Check formatting without changes
 **Full quality check workflow:**
 
 ```bash
-npm run lint && npm run lint:dead-code && npm run lint:duplicates && npm run format:check
+npm run lint && npm run lint:dead-code && npm run lint:duplicates && npm run lint:tech-debt && npm run format:check
 ```
 
 ### Code Quality Checks
@@ -286,6 +287,23 @@ function processOrder(order: Order) {
 - **When to run**: Periodically to identify refactoring opportunities
 - **Threshold**: Warns on code blocks with 50+ lines of duplication (min 5 lines)
 - **Response**: Extract duplicated code into shared utilities
+
+#### 5. Tech Debt Tracking
+
+- **Tool**: `check-tech-debt.js` - scans for unlinked TODO/FIXME comments
+- **Command**: `npm run lint:tech-debt`
+- **When to run**: Before committing (automated in pre-commit hook with --warn flag)
+- **Format**: All TODO/FIXME comments must link to issues using format: `TODO(#123)` or `FIXME(TICKET-456)`
+- **Example**:
+  ```typescript
+  // ❌ Invalid - unlinked
+  TODO: Refactor this function later
+
+  // ✅ Valid - linked to issue
+  TODO(#456): Refactor this function per issue #456
+  FIXME(PERF-123): Optimize query performance in ticket PERF-123
+  ```
+- **Response**: Link all technical debt to GitHub issues for tracking and prioritization
 
 ---
 
