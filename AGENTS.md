@@ -11,71 +11,70 @@ This guide translates `systemrule.md` into actionable instructions for AI agents
 - **OS**: Windows
 - **Shell**: Windows-Bash
 - **Critical Requirement**: All rules in this file MUST be followed without exception
+
 ### Always-rules:
 
 ### Path1code search|
-***This is default***
+
+**_This is default_**
 rules:
-  tool_selection_for_code_search:
-    critical_guidelines:
-      - description: "ALWAYS use codebase-retrieval MCP tool as your PRIMARY tool for code search."
-      - description: "DO NOT use Bash commands (find, grep, ag, rg, etc.) or Grep tool for semantic code understanding."
-      - description: "The codebase-retrieval MCP tool uses advanced semantic search and is specifically designed for code understanding."
-      - description: "Bash/Grep are only appropriate for exact string matching of non-code content (like error messages, config values, or log entries)."
-      - description: "When in doubt between Bash/Grep and codebase-retrieval MCP, ALWAYS choose codebase-retrieval MCP."
+tool_selection_for_code_search:
+critical_guidelines: - description: "ALWAYS use codebase-retrieval MCP tool as your PRIMARY tool for code search." - description: "DO NOT use Bash commands (find, grep, ag, rg, etc.) or Grep tool for semantic code understanding." - description: "The codebase-retrieval MCP tool uses advanced semantic search and is specifically designed for code understanding." - description: "Bash/Grep are only appropriate for exact string matching of non-code content (like error messages, config values, or log entries)." - description: "When in doubt between Bash/Grep and codebase-retrieval MCP, ALWAYS choose codebase-retrieval MCP."
 
-  preliminary_tasks_and_planning:
-    requirement: "Before starting to execute a task, ALWAYS use the codebase-retrieval MCP tool to make sure you have a clear understanding of the task and the codebase."
+preliminary_tasks_and_planning:
+requirement: "Before starting to execute a task, ALWAYS use the codebase-retrieval MCP tool to make sure you have a clear understanding of the task and the codebase."
 
-  making_edits:
-    protocol:
-      - "Before editing a file, ALWAYS first call the codebase-retrieval MCP tool, asking for highly detailed information about the code you want to edit."
-      - "Ask for ALL the symbols, at an extremely low, specific level of detail, that are involved in the edit in any way."
-      - "Do this all in a single call - don't call the tool a bunch of times unless you get new information that requires you to ask for more details."
-    scenarios:
-      method_call: "If you want to call a method in another class, ask for information about the class and the method."
-      class_instance: "If the edit involves an instance of a class, ask for information about the class."
-      class_property: "If the edit involves a property of a class, ask for information about the class and the property."
-    general_instruction: "If several of the above apply, ask for all of them in a single call. When in any doubt, include the symbol or object."
-
+making_edits:
+protocol: - "Before editing a file, ALWAYS first call the codebase-retrieval MCP tool, asking for highly detailed information about the code you want to edit." - "Ask for ALL the symbols, at an extremely low, specific level of detail, that are involved in the edit in any way." - "Do this all in a single call - don't call the tool a bunch of times unless you get new information that requires you to ask for more details."
+scenarios:
+method_call: "If you want to call a method in another class, ask for information about the class and the method."
+class_instance: "If the edit involves an instance of a class, ask for information about the class."
+class_property: "If the edit involves a property of a class, ask for information about the class and the property."
+general_instruction: "If several of the above apply, ask for all of them in a single call. When in any doubt, include the symbol or object."
 
 ### PATH2 Code search
+
 The best code search combines mgrep with grep.
 
 ### Code base search
+
 Use grep (or ripgrep) for... Exact Matches, Symbol tracing, Refactoring, Regex
 
 Use mgrep for...Intent Search, Code exploration, Feature discovery, Onboarding
 
 - id: graphite_stacked_diffs
-    trigger: "code changes during development phase"
-    condition: "When creating or updating code beyond trivial edits"
-    action: "Use Graphite stacked diff workflow (gt create/modify/submit/sync) instead of raw git commit/push"
-    tool: "gt (Graphite CLI)"
-    purpose: "Ensure all work is organized as small, ordered stacked diffs"
+  trigger: "code changes during development phase"
+  condition: "When creating or updating code beyond trivial edits"
+  action: "Use Graphite stacked diff workflow (gt create/modify/submit/sync) instead of raw git commit/push"
+  tool: "gt (Graphite CLI)"
+  purpose: "Ensure all work is organized as small, ordered stacked diffs"
 
-    IMPORTANT: Use the Read tool WITHOUT limit/offset parameters to read entire files
+  IMPORTANT: Use the Read tool WITHOUT limit/offset parameters to read entire files
 
 ---
 
 ## 2. Core Principles (Always Apply)
 
 ### KISS (Keep It Simple, Stupid)
+
 - Prioritize straightforward solutions over clever or complex ones
 - Avoid over-engineering
 - Choose readability over cleverness
 
 ### YAGNI (You Aren't Gonna Need It)
+
 - Don't implement features unless needed NOW
 - Avoid speculative architecture
 - Build for current requirements, not hypothetical future ones
 
 ### Component-First
+
 - Components should be reusable, composable, and self-contained
 - Co-locate styles, tests, and logic with components
 - Follow vertical slice architecture
 
 ### Performance By Default
+
 - Focus on clean, readable code
 - Let React 19's compiler handle optimizations
 - Only memoize when profiling reveals actual issues
@@ -99,12 +98,14 @@ Before editing ANY file:
 ## 4. Code Structure Rules
 
 ### File Organization
+
 - **One responsibility per file** — Single concern only
 - **Max file length: 500 lines** — Strictly enforced
 - **Modular design** — Break large files into smaller modules
 - **Relative imports** — Use relative paths within domains
 
 ### Architecture Patterns
+
 - **Vertical slice architecture** — Complete features in isolated slices
 - **Composition over inheritance** — Prefer composition patterns
 - **Fail-fast validation** — Validate early, fail explicitly
@@ -114,6 +115,7 @@ Before editing ANY file:
 ## 5. Design System (MANDATORY)
 
 ### Token-Only Rule
+
 - **ALWAYS** use design system tokens for:
   - Colors
   - Typography
@@ -124,6 +126,7 @@ Before editing ANY file:
 - **Exception**: None. Update design tokens if needed, never inline styles.
 
 ### Design System Location
+
 - Tokens stored in: `design -system/`
 - Reference: `design -system/design.md`
 
@@ -136,14 +139,15 @@ The Graphite workflow enables efficient code review and incremental development 
 ### Core Principles
 
 #### 1. Small, Incremental Changes
+
 - Break features into small, logically cohesive diffs (typically 200-400 lines)
 - Each diff should represent a single, reviewable concept
 - Reduces cognitive load on reviewers and enables faster feedback
 
-
 ## 7. AI Agent Behavior
 
 ### Non-Negotiable Rules
+
 - ❌ **No assumptions** — Verify everything
 - ❌ **No hallucinated functions** — Only use existing APIs/functions
 - ✅ **Confirm paths and modules** — Check before using
@@ -155,12 +159,14 @@ The Graphite workflow enables efficient code review and incremental development 
 ## 8. Implementation Workflow
 
 ### Pre-Implementation
+
 1. **Follow Context Agent plans** — Always adhere to generated implementation plans
 2. **Never change without context** — Require valid context and plan
 3. **Maintain existing functionality** — All current features must continue working
 4. **Ensure backwards compatibility** — No breaking changes
 
 ### During Implementation
+
 - **Complete all related updates** — No partial implementations allowed
 - **Write modular, maintainable code** — Avoid monolithic files
 - **Check other domains first** — Prevent duplicate logic
@@ -168,6 +174,7 @@ The Graphite workflow enables efficient code review and incremental development 
 - **Maintain pattern consistency** — Follow established patterns
 
 ### Integration Checklist (Before Completing)
+
 - [ ] Fully integrated into system structure?
 - [ ] All imports, styles, modules updated?
 - [ ] Would this work in production (not isolated)?
@@ -180,10 +187,13 @@ The Graphite workflow enables efficient code review and incremental development 
 **Before making ANY change:**
 
 ### Step 1: Identify Dependencies
+
 Ask: "What other parts of the system read, write, or depend on this data/functionality?"
 
 ### Step 2: Map All Affected Systems
+
 List ALL dependent:
+
 - Files
 - Components
 - Routes
@@ -192,13 +202,92 @@ List ALL dependent:
 - Tests
 
 ### Step 3: Update Everything Together
+
 Make changes to ALL dependent systems in the **same commit/PR**
 
 ### Step 4: Test End-to-End
+
 Verify the complete flow works across all systems
 
 ---
 
+## 10. Code Quality & Linting Standards
+
+### Running Quality Checks
+
+All code is automatically linted to ensure quality and consistency:
+
+```bash
+npm run lint              # Run ESLint checks (complexity, file size, naming conventions)
+npm run lint:dead-code    # Run knip to detect unused exports and dead code
+npm run lint:duplicates   # Run jscpd to detect code duplication
+npm run format            # Auto-format code with Prettier
+npm run format:check      # Check formatting without changes
+```
+
+**Full quality check workflow:**
+
+```bash
+npm run lint && npm run lint:dead-code && npm run lint:duplicates && npm run format:check
+```
+
+### Code Quality Checks
+
+Three automated checks ensure code quality:
+
+#### 1. Cyclomatic Complexity
+
+- **Limit**: Functions must not exceed complexity score of **10**
+- **Enforcement**: ESLint's `complexity` rule warns on complex functions
+- **When you see warnings**: Refactor into smaller, simpler functions
+- **Common patterns to break up**: Nested conditionals, switch statements with many cases, multiple loops
+
+Example of refactoring complex code:
+
+```typescript
+// ❌ Complex - Multiple nested conditions
+function processOrder(order: Order) {
+  if (order.items.length > 0) {
+    if (order.total > 100) {
+      if (order.customer.isVIP) {
+        // ... nested logic
+      }
+    }
+  }
+}
+
+// ✅ Refactored - Clear, simple functions
+function processOrder(order: Order) {
+  if (order.items.length === 0) return;
+  const hasLargeOrder = order.total > 100;
+  const isVIP = order.customer.isVIP;
+  applyDiscounts(order, hasLargeOrder, isVIP);
+}
+```
+
+#### 2. File Size
+
+- **Limit**: Files must not exceed **500 lines** of code
+- **Enforcement**: ESLint's `max-lines` rule (skipBlankLines and skipComments enabled)
+- **When you see warnings**: Split the file into smaller, focused modules
+- **Best practice**: Keep files focused on a single responsibility
+
+#### 3. Dead Code Detection
+
+- **Tool**: `knip` - detects unused exports, imports, and dead files
+- **Command**: `npm run lint:dead-code`
+- **When to run**: Before committing, especially after refactoring
+- **Interpretation**: Knip reports unused exports/imports - evaluate if genuinely unused or API surface
+
+#### 4. Duplicate Code Detection
+
+- **Tool**: `jscpd` - detects copy-pasted code blocks
+- **Command**: `npm run lint:duplicates`
+- **When to run**: Periodically to identify refactoring opportunities
+- **Threshold**: Warns on code blocks with 50+ lines of duplication (min 5 lines)
+- **Response**: Extract duplicated code into shared utilities
+
+---
 
 ## 11. Common Pitfalls (AVOID)
 
@@ -215,14 +304,13 @@ Verify the complete flow works across all systems
 ## 12. Development Workflow
 
 ### Preferred Approach
+
 1. **Test-first development** — Write tests before implementation
 2. **Think before architecting** — Plan thoroughly
 3. **Break tasks into smaller units** — Manageable pieces
 4. **Validate before building** — Confirm approach is correct
 
 ---
-
-
 
 ## 14. Quick Reference Checklist
 
@@ -239,7 +327,6 @@ Before completing any task, verify:
 - [ ] Confidence score provided (if complex task)
 
 ---
-
 
 ## Version
 

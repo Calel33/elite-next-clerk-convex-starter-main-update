@@ -61,6 +61,7 @@
     "@types/react-dom": "^19",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
+    "eslint-plugin-complexity": "^1.4.0",
     "husky": "^9.0.0",
     "jscpd": "^3.5.0",
     "knip": "^5.0.0",
