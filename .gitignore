@@ -75,3 +75,9 @@ com*
 
 # jscpd report output — regenerable (run `bun run lint:duplicates`)
 /jscpd-report.json
+
+# firecrawl research output — regenerable (session research artifacts)
+/.firecrawl/
+
+# ripgrep companion file for the local graft workflow — machine-local search tuning
+/.ignore

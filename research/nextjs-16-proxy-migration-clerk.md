@@ -1,24 +1,25 @@
 # Next.js 16 Proxy Migration: Clerk Integration Research
 
-**Status:** Monitoring  
+**Status:** Resolved — migrated to `proxy.ts` on 2026-10-02  
 **Priority:** Medium  
 **Created:** December 18, 2025  
-**Last Updated:** December 18, 2025
+**Last Updated:** October 2, 2026
 
 ---
 
 ## Executive Summary
 
-Next.js 16 has deprecated the `middleware.ts` file convention in favor of `proxy.ts`. This research tracks Clerk's official guidance for migrating `clerkMiddleware()` to work with the new proxy pattern. Currently, Clerk's SDK **has not yet published** official Next.js 16 proxy migration documentation, and their current examples still use `middleware.ts`.
+Next.js 16 deprecated the `middleware.ts` file convention in favor of `proxy.ts`. This document tracked Clerk's official guidance for migrating `clerkMiddleware()` — the migration is now complete.
 
-**Current State:**
+**Status update (2026-10-02): RESOLVED — migrated.** Clerk has updated its official Next.js reference: for Next.js ≥16 the middleware file is named `proxy.ts` with identical code (the `clerkMiddleware()` default export and `config.matcher` are unchanged). The codemod is optional. Our migration was a plain file rename (no codemod needed — our export is an anonymous default, so there was no `middleware()` function to rename) plus adding `/__clerk/(.*)` to the matcher per the current reference. See "Resolution" below; the remainder of this document is preserved as the original December 2025 research record.
 
-- ✅ Our `middleware.ts` works perfectly with Next.js 16 (backward compatible)
-- ⚠️ Deprecation warning appears but does not block functionality
-- ❌ Clerk has not released `clerkProxy()` or proxy-specific guidance
-- ✅ Security: All auth flows functional, no vulnerabilities introduced
+## Resolution (2026-10-02)
 
-**Recommendation:** **DEFER MIGRATION** until Clerk publishes official proxy migration guide.
+- ✅ `middleware.ts` → `proxy.ts` (rename only, same `clerkMiddleware` default export and matcher logic).
+- ✅ Matcher now includes `/__clerk/(.*)` ("Always run for Clerk-specific frontend API routes") per the current Clerk docs. Harmless while `frontendApiProxy` is disabled; required if that option is ever enabled.
+- ✅ Production build no longer prints the Next.js middleware deprecation warning; build stays green with the same route table.
+- ⚠️ `createRouteMatcher()` is now deprecated by Clerk (`@clerk/nextjs` v7): still functional, logs a one-time development warning, planned for removal in the next major. Decision: kept for Phase 2; follow-up = migrate to resource-based auth checks (https://clerk.com/docs/guides/development/upgrading/upgrade-guides/migrate-from-create-route-matcher).
+- 🔗 Sources: Clerk `clerkMiddleware()` reference and Next.js `middleware-to-proxy` migration message (both checked 2026-10-02).
 
 ---
 
@@ -420,6 +421,7 @@ export const config = {
 | Date       | Version | Changes                           | Author   |
 | ---------- | ------- | --------------------------------- | -------- |
 | 2025-12-18 | 1.0     | Initial research document created | OpenCode |
+| 2026-10-02 | 2.0     | Migration completed with Clerk 7 upgrade; status updated to Resolved | OpenCode |
 
 ---
 
