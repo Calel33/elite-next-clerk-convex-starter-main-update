@@ -69,3 +69,9 @@ com*
 
 # Husky hooks (maintained separately)
 .husky/
+
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/
+
+# jscpd report output — regenerable (run `bun run lint:duplicates`)
+/jscpd-report.json
